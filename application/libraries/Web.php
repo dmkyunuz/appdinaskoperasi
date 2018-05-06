@@ -13,6 +13,7 @@ Class Web
 	protected $_jqueryPlugins;
 	protected static $header_title;
 	public $path;
+	public static $_alert;
 	private static $_meta = [];
 	
 
@@ -187,9 +188,44 @@ Class Web
 		self::$ci->load->view($view_name, $params);
 	}
 
+
+	public static function setFlashMessage($item = 'result', $value = null)
+	{
+		// return self::$ci->session->set_flashdata($item, $value);
+	}
+
+	public static function CreateAlert($type ='alert-dark', $message = 'Input message', $flash_item = false)
+	{
+		$output = '<div class="alert '.$type.' alert-dismissible fade show" role="alert">';
+			$output .= $message;
+			$output .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+				$output .= '<span aria-hidden="true">&times;</span>';
+			$output .= '</button>';
+		$output .= '</div>';
+		if($flash_item){
+			return self::$ci->session->set_flashdata($flash_item, $output);
+		}
+		else{
+			self::$_alert = $output;
+			return $this;
+		}
+
+	}
+
+	public static function GetAlert($flash_item = false)
+	{
+		if($flash_item){
+			return self::$ci->session->flashdata($flash_item);
+		}else{
+			return self::$_alert;
+		}
+	}
+
 	public function __destruct()
 	{
 
 	}
+
+
 
 }

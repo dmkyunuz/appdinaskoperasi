@@ -1,7 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-Class BentukKoperasiModel Extends CI_Model
+Class KecamatanModel Extends CI_Model
 {
 	private $table = 'bentuk_koperasi';
 	private $pk = 'kd_bk';

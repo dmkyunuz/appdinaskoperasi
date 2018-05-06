@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Bentuk_koperasi extends MX_Controller  {
+class Kecamatan extends MX_Controller  {
 
 	function __construct()
     {
         parent::__construct();
 		$this->auth->check();
-		$this->load->model('bentuk_koperasi/BentukKoperasiModel', 'BentukKoperasiModel');
+		$this->load->model('kecamatan/KecamatanModel', 'kecamatanmodel');
 
     }
 
