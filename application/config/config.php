@@ -545,7 +545,8 @@ $config['assets'] = [
 			'public/vendor/font-awesome/css/font-awesome.css',
 			'public/vendor/datatables/dataTables.bootstrap4.css',
 			'public/bootstrap/css/sb-admin.css',
-			'public/assets/css/animate.css',
+            'public/assets/css/animate.css',
+			'public/assets/css/select2.min.css',
 		]
 		,'bootstrap' => [
 
@@ -584,6 +585,7 @@ $config['assets'] = [
 		    // "public/bootstrap/js/sb-admin-charts.min.js",
 		    "public/assets/js/jquery.pjax.js",
 			'public/assets/js/jquery.validate.min.js',
-			'public/assets/js/additional-methods.min.js',
+            'public/assets/js/additional-methods.min.js',
+			'public/assets/js/select2.min.js',
 		]
 	];
