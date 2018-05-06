@@ -1,18 +1,38 @@
 <div class="">
-<form class="" method="post" action="<?= site_url('/kecamatan/update/'.$model->kd_kecamatan); ?>" id="form-kecamatan">
+<form class="" method="post" action="<?= site_url('/kelurahan/update/'.$model->kd_kelurahan); ?>" id="form-kelurahan">
     <fieldset>
         <div class='row'>
             <div class='col-sm-12'>
                 <label>Kode</label>
                 <div class='form-group'>
-                    <input class="form-control required" id="kd_kecamatan" name="kd_kecamatan" type="text" autocomplete="off" placeholder="Kode" readonly value="<?= $model->kd_kecamatan ?>">
+                    <input class="form-control required" id="kd_kelurahan" name="kd_kelurahan" type="text" autocomplete="off" placeholder="Kode" readonly value="<?= $model->kd_kelurahan ?>">
                     
                 </div>
             </div>
             <div class='col-sm-12'>
-                <label>Kecamatan</label>
+                <label>Nama Kecamatan</label>
                 <div class='form-group'>
-                    <input class="form-control required" id="nama_kecamatan" name="nama_kecamatan" type="text" autocomplete="off" placeholder="Bentuk Koperasi" value="<?= $model->nama_kecamatan ?>" />
+                    <select class="form-control js-example-basic-single required" name="kd_kec" id="kd_kec">
+                        <option value="">Select Kecamatan</option>
+                        <?php
+                            
+                            foreach ($kecamatan as $kec) { 
+                                $selected = '';
+                                if($kec->kd_kecamatan == $model->kd_kec){
+                                    $selected = 'selected';
+                                }
+                                ?>
+                                <option <?= $selected; ?> value="<?= $kec->kd_kecamatan?>"><?= $kec->nama_kecamatan?></option>    
+                        <?php   }
+                        ?>
+                    </select>
+                    
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <label>Bentuk Koperasi</label>
+                <div class='form-group'>
+                    <input class="form-control required" id="nama_kelurahan" name="nama_kelurahan" type="text" autocomplete="off" placeholder="Bentuk Koperasi" value="<?= $model->nama_kelurahan ?>" />
                     
                 </div>
             </div>
@@ -25,7 +45,7 @@
 </form>
 </div>
 <script type="text/javascript">
-    var formBentukKoperasi = $("#form-kecamatan");
+    var formBentukKoperasi = $("#form-kelurahan");
     var cancelBtn = $("#cancel-btn");
     cancelBtn.click(function(){
         closeModal();
@@ -39,17 +59,17 @@
     }, 'Please enter valid name');
     var bentukKoperasiValidator = formBentukKoperasi.validate({
         rules : {
-            nama_kecamatan : {
+            nama_kelurahan : {
                 required : true,
                 minlength : 1,
                 remote : {
-                    url : "<?= site_url('/kecamatan/unique-check')?>",
+                    url : "<?= site_url('/kelurahan/unique-check')?>",
                     type : 'POST',
                     data : { 
-                        nama_kecamatan : function(){
-                            return $("#nama_kecamatan").val();
+                        nama_kelurahan : function(){
+                            return $("#nama_kelurahan").val();
                         },
-                        id : '<?= $model->kd_kecamatan?>',
+                        id : '<?= $model->kd_kelurahan?>',
                     },
 
                 }
@@ -58,7 +78,7 @@
             }
         },
         messages : {
-            nama_kecamatan : {
+            nama_kelurahan : {
                 
             },
             kepanjangan : {
@@ -66,12 +86,12 @@
             }
         },
         submitHandler : function(form){
-            saveBentukKoperasi();
+            saveKelurahan();
             return false;
         }
     });
 
-    function saveBentukKoperasi()
+    function saveKelurahan()
     {
         $.ajax({
             type : 'POST',
@@ -81,7 +101,7 @@
             success : function (response){
                 if(response.status == 'success'){
                     closeModal();
-                    loadPage('<?= site_url('/kecamatan') ?>');
+                    loadPage('<?= site_url('/kelurahan') ?>');
                 }
             }
         })
