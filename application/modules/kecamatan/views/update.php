@@ -1,32 +1,22 @@
 <div class="">
-<form class="" method="post" action="<?= site_url('/bentuk-koperasi/update/'.$model->kd_bk); ?>" id="form-bentuk-koperasi">
+<form class="" method="post" action="<?= site_url('/kecamatan/update/'.$model->kd_kecamatan); ?>" id="form-kecamatan">
     <fieldset>
         <div class='row'>
             <div class='col-sm-12'>
                 <label>Kode</label>
                 <div class='form-group'>
-                    <input class="form-control required" id="kode_bk" name="kode_bk" type="text" autocomplete="off" placeholder="Kode" readonly value="<?= $model->kd_bk ?>">
+                    <input class="form-control required" id="kd_kecamatan" name="kd_kecamatan" type="text" autocomplete="off" placeholder="Kode" readonly value="<?= $model->kd_kecamatan ?>">
                     
                 </div>
             </div>
             <div class='col-sm-12'>
                 <label>Bentuk Koperasi</label>
                 <div class='form-group'>
-                    <input class="form-control required" id="nama_bk" name="nama_bk" type="text" autocomplete="off" placeholder="Bentuk Koperasi" value="<?= $model->nama_bk ?>" />
+                    <input class="form-control required" id="nama_kecamatan" name="nama_kecamatan" type="text" autocomplete="off" placeholder="Bentuk Koperasi" value="<?= $model->nama_kecamatan ?>" />
                     
                 </div>
             </div>
-        </div>      
-        <div class='row'>
-            <div class='col-sm-12'>
-                <label>Kepanjangan</label>    
-                <div class='form-group'>
-                    <input class="form-control required" id="kepanjangan" name="kepanjangan" type="text" autocomplete="off"  placeholder="Kepanjangan" value="<?= $model->kepanjangan ?>" />
-                    
-                </div>
-            </div>
-        </div>  
-
+        </div>   
     </fieldset>
     <div class="pull-right">
         <button type="submit" class="btn btn-info">Save</button>
@@ -35,7 +25,7 @@
 </form>
 </div>
 <script type="text/javascript">
-    var formBentukKoperasi = $("#form-bentuk-koperasi");
+    var formBentukKoperasi = $("#form-kecamatan");
     var cancelBtn = $("#cancel-btn");
     cancelBtn.click(function(){
         closeModal();
@@ -49,17 +39,17 @@
     }, 'Please enter valid name');
     var bentukKoperasiValidator = formBentukKoperasi.validate({
         rules : {
-            nama_bk : {
+            nama_kecamatan : {
                 required : true,
                 minlength : 1,
                 remote : {
-                    url : "<?= site_url('/bentuk-koperasi/unique-check')?>",
+                    url : "<?= site_url('/kecamatan/unique-check')?>",
                     type : 'POST',
                     data : { 
-                        nama_bk : function(){
-                            return $("#nama_bk").val();
+                        nama_kecamatan : function(){
+                            return $("#nama_kecamatan").val();
                         },
-                        id : '<?= $model->kd_bk?>',
+                        id : '<?= $model->kd_kecamatan?>',
                     },
 
                 }
@@ -68,7 +58,7 @@
             }
         },
         messages : {
-            nama_bk : {
+            nama_kecamatan : {
                 
             },
             kepanjangan : {
@@ -91,7 +81,7 @@
             success : function (response){
                 if(response.status == 'success'){
                     closeModal();
-                    loadPage('<?= site_url('/bentuk-koperasi') ?>');
+                    loadPage('<?= site_url('/kecamatan') ?>');
                 }
             }
         })

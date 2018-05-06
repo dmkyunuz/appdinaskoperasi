@@ -3,13 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 Class KecamatanModel Extends CI_Model
 {
-	private $table = 'bentuk_koperasi';
-	private $pk = 'kd_bk';
+	private $table = 'kecamatan';
+	private $pk = 'kd_kecamatan';
 	
-	public $kd_bk = null;
+	public $kd_kecamatan = null;
 
-	public $nama_bk = null;
-	public $kepanjangan = null;
+	public $nama_kecamatan = null;
 
 	private $_filter_params;
 	private $_limit;
@@ -24,7 +23,7 @@ Class KecamatanModel Extends CI_Model
 		$this->_tbl_fields = $this->db->list_fields($this->table);
 	}
 
-	protected function valkd_bkField($params)
+	protected function valkd_kecamatanField($params)
 	{
 		foreach ($params as $item => $value) {
 			if(!in_array($item, $this->_tbl_fields)){
@@ -40,9 +39,8 @@ Class KecamatanModel Extends CI_Model
 
 
 		$data = [
-			'kd_bk' 	=> $this->kd_bk,
-			'nama_bk' 	=> $this->nama_bk,
-			'kepanjangan' 	=> $this->kepanjangan,
+			'kd_kecamatan' 	=> $this->kd_kecamatan,
+			'nama_kecamatan' 	=> $this->nama_kecamatan,
 		];
 
 		return $this->db->insert($this->table, $data);		
@@ -53,13 +51,11 @@ Class KecamatanModel Extends CI_Model
 	{
 		$result['status'] = true;
 		$result['msg'] = 'Email exist';
-		$kd_bk = $this->kd_bk;
+		$kd_kecamatan = $this->kd_kecamatan;
 		$data = [
-			
-			'nama_bk' 	=> $this->nama_bk,
-			'kepanjangan' 	=> $this->kepanjangan,
+			'nama_kecamatan' 	=> $this->nama_kecamatan,
 		];
-		$this->db->where('kd_bk', $kd_bk);
+		$this->db->where('kd_kecamatan', $kd_kecamatan);
 		return $this->db->update($this->table, $data);		
 	}
 
@@ -83,12 +79,12 @@ Class KecamatanModel Extends CI_Model
 		$offset = $current_page * $limit;
 
 		if(!empty($filter_params)){
-			$filter_params = $this->valkd_bkField();
+			$filter_params = $this->valkd_kecamatanField();
 			foreach ($filter_params as $item => $value) {
 				$this->db->like($item, $value, 'both');
 			}
 		}
-		$this->db->order_by('kd_bk', 'ASC');
+		$this->db->order_by('kd_kecamatan', 'ASC');
 		$this->_query = $this->db->get($this->table, $limit, $offset);
 
 		return $this->get();
@@ -98,7 +94,7 @@ Class KecamatanModel Extends CI_Model
 	public function findOne($id)
 	{
 		
-		$this->_query = $this->db->get('bentuk_koperasi', ['kd_bk' => $id]);
+		$this->_query = $this->db->get_where($this->table, ['kd_kecamatan' => $id]);
 		return $this->get();
 
 	}

@@ -1,32 +1,22 @@
 <div class="">
-<form class="" method="post" action="<?= site_url('/bentuk-koperasi/create'); ?>" id="form-bentuk-koperasi">
+<form class="" method="post" action="<?= site_url('/kecamatan/create'); ?>" id="form-kecamatan">
 	<fieldset>
 		<div class='row'>
 			<div class='col-sm-12'>
 				<label>Kode</label>
 				<div class='form-group'>
-					<input class="form-control required" id="kd_bk" name="kd_bk" type="text" autocomplete="off" placeholder="Kode" readonly value="<?= $kode_bk; ?>">
+					<input class="form-control required" id="kd_kecamatan" name="kd_kecamatan" type="text" autocomplete="off" placeholder="Kode" readonly value="<?= $kd_kecamatan; ?>">
 					
 				</div>
 			</div>
 			<div class='col-sm-12'>
 				<label>Bentuk Koperasi</label>
 				<div class='form-group'>
-					<input class="form-control required" id="nama_bk" name="nama_bk" type="text" autocomplete="off" placeholder="Bentuk Koperasi" />
+					<input class="form-control required" id="nama_kecamatan" name="nama_kecamatan" type="text" autocomplete="off" placeholder="Bentuk Koperasi" />
 					
 				</div>
 			</div>
 		</div>		
-		<div class='row'>
-			<div class='col-sm-12'>
-				<label>Kepanjangan</label>    
-				<div class='form-group'>
-					<input class="form-control required" id="kepanjangan" name="kepanjangan" type="text" autocomplete="off" value=""  placeholder="Kepanjangan" />
-					
-				</div>
-			</div>
-		</div>	
-
 	</fieldset>
 	<div class="pull-right">
 		<button type="submit" class="btn btn-info">Save</button>
@@ -35,7 +25,7 @@
 </form>
 </div>
 <script type="text/javascript">
-	var formBentukKoperasi = $("#form-bentuk-koperasi");
+	var formBentukKoperasi = $("#form-kecamatan");
 	var cancelBtn = $("#cancel-btn");
 	cancelBtn.click(function(){
 		closeModal();
@@ -49,15 +39,15 @@
 	}, 'Please enter valid name');
 	var bentukKoperasiValidator = formBentukKoperasi.validate({
 		rules : {
-			nama_bk : {
+			nama_kecamatan : {
 				required : true,
 				minlength : 1,
 				remote : {
-					url : "<?= site_url('/bentuk-koperasi/unique-check')?>",
+					url : "<?= site_url('/kecamatan/unique-check')?>",
 					type : 'POST',
 					data : { 
-						nama_bk : function(){
-							return $("#nama_bk").val();
+						nama_kecamatan : function(){
+							return $("#nama_kecamatan").val();
 						}
 					},
 
@@ -67,7 +57,7 @@
 			}
 		},
 		messages : {
-			nama_bk : {
+			nama_kecamatan : {
 				remote : 'Data already exist'
 			},
 			kepanjangan : {
@@ -90,7 +80,7 @@
 			success : function (response){
 				if(response.status == 'success'){
 					closeModal();
-					loadPage('<?= site_url('/bentuk-koperasi') ?>');
+					loadPage('<?= site_url('/kecamatan') ?>');
 				}
 			}
 		})

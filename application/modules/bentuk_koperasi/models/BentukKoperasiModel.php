@@ -98,7 +98,7 @@ Class BentukKoperasiModel Extends CI_Model
 	public function findOne($id)
 	{
 		
-		$this->_query = $this->db->get('bentuk_koperasi', ['kd_bk' => $id]);
+		$this->_query = $this->db->get_where('bentuk_koperasi', ['kd_bk' => $id]);
 		return $this->get();
 
 	}

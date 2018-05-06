@@ -14,7 +14,7 @@ class Kecamatan extends MX_Controller  {
 	public function index()
 	{
 		$request = $this->app->request();
-		$model = $this->BentukKoperasiModel->findAll()->result();
+		$model = $this->kecamatanmodel->findAll()->result();
 		if($this->input->is_ajax_request()){
 
 			if(!$request->post()){
@@ -49,11 +49,10 @@ class Kecamatan extends MX_Controller  {
 				$result['status'] = 'failed';
 				$result['msg'] = 'Save users failed';
 
-				$model = $this->BentukKoperasiModel;
+				$model = $this->kecamatanmodel;
 
-				$model->kd_bk = trim($this->input->post('kd_bk'));
-				$model->nama_bk = trim($this->input->post('nama_bk'));
-				$model->kepanjangan = trim($this->input->post('kepanjangan'));
+				$model->kd_kecamatan = trim($this->input->post('kd_kecamatan'));
+				$model->nama_kecamatan = trim($this->input->post('nama_kecamatan'));
 
 				
 				if($model->save())
@@ -68,8 +67,8 @@ class Kecamatan extends MX_Controller  {
 				echo json_encode($result);
 			
 			}else{
-				$kode_bk = $this->generateID('bentuk_koperasi', 'BK' , 'kd_bk');
-				Web::RenderAjax('create', ['kode_bk' => $kode_bk ]);
+				$kd_kecamatan = $this->generateID('kecamatan', 'K' , 'kd_kecamatan');
+				Web::RenderAjax('create', ['kd_kecamatan' => $kd_kecamatan ]);
 			}
 		}else{
 			die('Access denied');
@@ -78,14 +77,14 @@ class Kecamatan extends MX_Controller  {
 
 	public function unique_check()
 	{
-		$nama_bk = trim($this->input->post('nama_bk') ? $this->input->post('nama_bk') : false);
+		$nama_kecamatan = trim($this->input->post('nama_kecamatan') ? $this->input->post('nama_kecamatan') : false);
 		$id = trim($this->input->post('id') ? $this->input->post('id') : false);
 		$this->db->select("*");
-		$this->db->where('nama_bk', $nama_bk);
+		$this->db->where('nama_kecamatan', $nama_kecamatan);
 		if($id){
-			$this->db->where('kd_bk !=', $id);
+			$this->db->where('kd_kecamatan !=', $id);
 		}
-		$row_count = $this->db->get('bentuk_koperasi')->num_rows();
+		$row_count = $this->db->get('kecamatan')->num_rows();
 		
 		if($row_count == true){
 			echo "false";
@@ -98,19 +97,18 @@ class Kecamatan extends MX_Controller  {
 	public function update($id)
 	{
 		$request = $this->app->request();
-		$kd_bk = $id;
+		$kd_kecamatan = $id;
 
-		$model = $this->BentukKoperasiModel;
+		$model = $this->kecamatanmodel;
 		if($this->input->is_ajax_request()){
 			if($request->post()){
 				$result['status'] = 'failed';
 				$result['msg'] = 'Save users failed';
 
-				$model = $this->BentukKoperasiModel;
+				$model = $this->kecamatanmodel;
 
-				$model->kd_bk = trim($id);
-				$model->nama_bk = trim($this->input->post('nama_bk'));
-				$model->kepanjangan = trim($this->input->post('kepanjangan'));
+				$model->kd_kecamatan = trim($id);
+				$model->nama_kecamatan = trim($this->input->post('nama_kecamatan'));
 
 				
 				if($model->update())
@@ -124,7 +122,7 @@ class Kecamatan extends MX_Controller  {
 
 				echo json_encode($result);
 			}else{
-				$model = $model->findOne($kd_bk)->row();
+				$model = $model->findOne($kd_kecamatan)->row();
 				Web::RenderAjax('update', ['model' => $model ]);
 			}
 			
@@ -135,7 +133,7 @@ class Kecamatan extends MX_Controller  {
 
 	public function test()
 	{
-		$this->generateID('bentuk_koperasi', 'BK' , 'kd_bk');
+		$this->generateID('kecamatan', 'K' , 'kd_kecamatan');
 	}
 
 	protected function generateID($tabel, $inisial, $field){
@@ -180,18 +178,18 @@ class Kecamatan extends MX_Controller  {
 	}
 
 	public function delete($id = null){;
-		$model = $this->BentukKoperasiModel;
+		$model = $this->kecamatanmodel;
 		if($id == false){
 			return die('Error');
 		}
 
-		$kd_bk = $id;
-		if($this->db->delete('bentuk_koperasi', ['kd_bk' => $id])){
+		$kd_kecamatan = $id;
+		if($this->db->delete('kecamatan', ['kd_kecamatan' => $id])){
 			
 			$message = "Berhasil menghapus data.";
 			Web::CreateAlert('alert-success', $message, 'message');
 			
-			redirect('/bentuk-koperasi');
+			redirect('/kecamatan');
 		}
 	}
 

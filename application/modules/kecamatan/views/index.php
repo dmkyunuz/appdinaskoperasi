@@ -6,23 +6,22 @@
 	 <?php
 	breadcrumb::create([
 		['label'=> 'Dashboard', 'url' => site_url('/')],
-		['label'=> 'Bentuk Koperasi']
+		['label'=> 'Kecamatan']
 	]);
 
 	?>
 
 	<?=  Web::GetAlert('message') ?>
-	<button type="button" class="btn btn-info" data-title="Tambah Bentuk Koperasi" data-toggle="modal" data-remote="<?= site_url('/bentuk-koperasi/create');?>" data-target="#form-modal"><i class="fa fa-plus"></i> &nbsp;Tambah Bentuk Koperasi</button>
+	<button type="button" class="btn btn-info" data-title="Tambah Kecamatan" data-toggle="modal" data-remote="<?= site_url('/Kecamatan/create');?>" data-target="#form-modal"><i class="fa fa-plus"></i> &nbsp;Tambah Kecamatan</button>
 
-	<a class="btn btn-success" href="<?= site_url('/bentuk-koperasi');?>" ><i class="fa fa-refresh"></i> &nbsp;Refresh</a>
+	<a class="btn btn-success" href="<?= site_url('/kecamatan');?>" ><i class="fa fa-refresh"></i> &nbsp;Refresh</a>
 	<div class="clearfix">&nbsp;</div>
 		<table class="table table-striped table-bordered table-sm" id="dataTable">
 			<thead>
 				<tr>
 					<th>No</th>
-					<th>ID</th>
-					<th>Bentuk Koperasi</th>
-					<th>Kepanjangan</th>
+					<th>Kode Kecamatan</th>
+					<th>Kecamatan</th>
 					<th width="80px">#</th>
 				</tr>
 			</thead>
@@ -32,12 +31,11 @@
 					foreach ($model as $row) { ?>
 						<tr>
 							<td><?= $no++; ?></td>
-							<td><?= $row->kd_bk; ?></td>
-							<td><?= $row->nama_bk; ?></td>
-							<td><?= $row->kepanjangan; ?></td>
+							<td><?= $row->kd_kecamatan; ?></td>
+							<td><?= $row->nama_kecamatan; ?></td>
 							<td>
-								<button class="btn btn-success btn-sm" data-title="Edit Bentuk Koperasi" data-toggle="modal" data-remote="<?= site_url('/bentuk-koperasi/update/'.$row->kd_bk);?>" data-target="#form-modal"><i class="fa fa-edit"></i></button>
-								<a href="<?= site_url('/bentuk-koperasi/delete/'.$row->kd_bk);?>" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+								<button class="btn btn-success btn-sm" data-title="Edit Kecamatan" data-toggle="modal" data-remote="<?= site_url('/kecamatan/update/'.$row->kd_kecamatan);?>" data-target="#form-modal"><i class="fa fa-edit"></i></button>
+								<a href="<?= site_url('/kecamatan/delete/'.$row->kd_kecamatan);?>" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
 							</td>
 						</tr>
 				<?php	}
